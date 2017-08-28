@@ -22,7 +22,7 @@ namespace ToDoListApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<todolistContext>();
+            services.AddDbContext<Models.todolistContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
