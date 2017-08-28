@@ -13,28 +13,31 @@
 </div>
 <divclass="row">
     <h2>To Be Completed:</h2>
-    <form asp-controller="Home" asp-action="Complete" method="post">
+    
     <ul>
         @foreach(var item in Model)
         {
             @if(item.Complete == false)
             {
                 <li>
-                    <button type="submit">Done</button>
-                    @item.TaskName
+                    <form asp-controller="Home" asp-action="Complete" method="post">
+                        <input type="hidden" name="id" value="@item.ID">
+                        <button type="submit">Done</button>
+                        @item.TaskName
+                    </form>
                 </li>
             }
         
         }
     </ul>
-    </form>
+    
     <h2>Completed:</h2>
     <ul>
         @foreach(var item in Model)
         {
             @if(item.Complete == true)
             {
-                <li>@item.TaskName</li>
+                <li>@item.TaskName | @item.Time</li>
             }
         
         }

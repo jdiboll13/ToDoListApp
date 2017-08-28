@@ -35,17 +35,13 @@ namespace ToDoListApp.Controllers
             return View(_context.ToDo.ToList());
         }
         [HttpPost]
-        public IActionResult Complete(bool done) 
+        public IActionResult Complete(int id) 
         {
-            var CurrentToDo = new ToDoListModel
-            {
-                Complete = true
-            };
-
-            _context.Add(CurrentToDo);
+            var done = _context.ToDo.SingleOrDefault(i => i.ID == id);
+            done.IsComplete();
             _context.SaveChanges();
 
-            return View(_context.ToDo.ToList());
+            return Redirect("Index");
         }
         public IActionResult Error()
         {
