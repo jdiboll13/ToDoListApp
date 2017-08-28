@@ -19,23 +19,34 @@ namespace ToDoListApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_context.ToDo.ToList());
         }
-
-        public IActionResult About()
+        [HttpPost]
+        public IActionResult Index(string ItemName)
         {
-            ViewData["Message"] = "Your application description page.";
+            var CurrentToDo = new ToDoListModel
+            {
+                TaskName = ItemName
+            };
 
-            return View();
+            _context.Add(CurrentToDo);
+            _context.SaveChanges();
+
+            return View(_context.ToDo.ToList());
         }
-
-        public IActionResult Contact()
+        [HttpPost]
+        public IActionResult Complete(bool done) 
         {
-            ViewData["Message"] = "Your contact page.";
+            var CurrentToDo = new ToDoListModel
+            {
+                Complete = true
+            };
 
-            return View();
+            _context.Add(CurrentToDo);
+            _context.SaveChanges();
+
+            return View(_context.ToDo.ToList());
         }
-
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
